@@ -1,4 +1,5 @@
 ﻿using Entities.Models;
+using Entities.Seeds;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -15,5 +16,10 @@ namespace Entities
 
         public DbSet<Patient> Patients {get; set;}
         public DbSet<Appointment> Appointments { get; set; }
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.ApplyConfiguration(new PatientSeeder());
+        }
     }
 }

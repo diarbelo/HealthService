@@ -5,6 +5,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Migrations\20200620040103_Entities.RepositoryContext.cs" />
+    <Compile Remove="Migrations\20200620040103_Entities.RepositoryContext.Designer.cs" />
+    <Compile Remove="Migrations\20200620052447_Initial.cs" />
+    <Compile Remove="Migrations\20200620052447_Initial.Designer.cs" />
+    <Compile Remove="Migrations\20200620052751_SeedingPatient.cs" />
+    <Compile Remove="Migrations\20200620052751_SeedingPatient.Designer.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore" Version="3.1.5" />
     <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="3.1.5" />
   </ItemGroup>
