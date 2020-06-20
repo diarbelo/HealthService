@@ -3,6 +3,7 @@ using Entities;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Repository
@@ -12,7 +13,13 @@ namespace Repository
         public PatientRepository(RepositoryContext repositoryContext)
            : base(repositoryContext)
         {
+        }
 
+        public IEnumerable<Patient> GetAllPatients()
+        {
+            return FindAll()
+                .OrderBy(pt => pt.LastName)
+                .ToList();
         }
     }
 }

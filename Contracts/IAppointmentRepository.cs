@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Contracts
 {
-    public interface IAppointmentRepository : IRepositoryBase<Appointment>
+    public interface IAppointmentRepository
     {
     }
 }

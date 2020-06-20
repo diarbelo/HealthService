@@ -5,7 +5,8 @@ using System.Text;
 
 namespace Contracts
 {
-    public interface IPatientRepository : IRepositoryBase<Patient>
+    public interface IPatientRepository
     {
+        IEnumerable<Patient> GetAllPatients();
     }
 }
