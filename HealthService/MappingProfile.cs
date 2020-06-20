@@ -14,6 +14,9 @@ namespace HealthService
         public MappingProfile()
         {
             CreateMap<Patient, PatientDTO>();
+            CreateMap<Appointment, AppointmentDTO>();
+            CreateMap<PatientForCreationDTO, Patient>();
+            CreateMap<PatientForUpdateDTO, Patient>();
         }
     }
 }

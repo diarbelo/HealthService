@@ -11,8 +11,7 @@ namespace Entities.Migrations
                 name: "patient",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PatientId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
                     LastName = table.Column<string>(maxLength: 60, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
@@ -28,8 +27,7 @@ namespace Entities.Migrations
                 name: "appointment",
                 columns: table => new
                 {
-                    AppointmentId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    AppointmentId = table.Column<Guid>(nullable: false),
                     Date = table.Column<DateTime>(nullable: false),
                     AppointmentType = table.Column<string>(nullable: false),
                     Active = table.Column<bool>(nullable: false),
@@ -45,6 +43,21 @@ namespace Entities.Migrations
                         principalColumn: "PatientId",
                         onDelete: ReferentialAction.Cascade);
                 });
+
+            migrationBuilder.InsertData(
+                table: "patient",
+                columns: new[] { "PatientId", "Address", "DateOfBirth", "LastName", "Name", "PhoneNumber" },
+                values: new object[] { 11, "La mota", new DateTime(1954, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Betancur", "Armando", "310" });
+
+            migrationBuilder.InsertData(
+                table: "patient",
+                columns: new[] { "PatientId", "Address", "DateOfBirth", "LastName", "Name", "PhoneNumber" },
+                values: new object[] { 24, "La mota", new DateTime(1955, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Loaiza", "Ana", "311" });
+
+            migrationBuilder.InsertData(
+                table: "patient",
+                columns: new[] { "PatientId", "Address", "DateOfBirth", "LastName", "Name", "PhoneNumber" },
+                values: new object[] { 71, "La mota", new DateTime(1985, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Betancur", "Diego", "310" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_appointment_PatientId",

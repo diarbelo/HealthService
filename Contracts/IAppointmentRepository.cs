@@ -7,5 +7,6 @@ namespace Contracts
 {
     public interface IAppointmentRepository
     {
+        IEnumerable<Appointment> AppointmentsByPatient(int patientId);
     }
 }

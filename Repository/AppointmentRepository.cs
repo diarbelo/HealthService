@@ -3,6 +3,7 @@ using Entities;
 using Entities.Models;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Repository
@@ -13,6 +14,11 @@ namespace Repository
             : base(repositoryContext)
         {
 
+        }
+
+        public IEnumerable<Appointment> AppointmentsByPatient(int patientId)
+        {
+            return FindByCondition(ap => ap.PatientId.Equals(patientId)).ToList();
         }
     }
 }

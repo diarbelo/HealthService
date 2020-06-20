@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20200620052655_Initial")]
+    [Migration("20200620140144_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -23,11 +23,10 @@ namespace Entities.Migrations
 
             modelBuilder.Entity("Entities.Models.Appointment", b =>
                 {
-                    b.Property<int>("Id")
+                    b.Property<Guid>("Id")
                         .ValueGeneratedOnAdd()
                         .HasColumnName("AppointmentId")
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("uniqueidentifier");
 
                     b.Property<bool>("Active")
                         .HasColumnType("bit");
@@ -83,6 +82,35 @@ namespace Entities.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("patient");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 11,
+                            Address = "La mota",
+                            DateOfBirth = new DateTime(1954, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastName = "Betancur",
+                            Name = "Armando",
+                            PhoneNumber = "310"
+                        },
+                        new
+                        {
+                            Id = 24,
+                            Address = "La mota",
+                            DateOfBirth = new DateTime(1955, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastName = "Loaiza",
+                            Name = "Ana",
+                            PhoneNumber = "311"
+                        },
+                        new
+                        {
+                            Id = 71,
+                            Address = "La mota",
+                            DateOfBirth = new DateTime(1985, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified),
+                            LastName = "Betancur",
+                            Name = "Diego",
+                            PhoneNumber = "310"
+                        });
                 });
 
             modelBuilder.Entity("Entities.Models.Appointment", b =>
