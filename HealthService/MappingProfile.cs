@@ -17,6 +17,7 @@ namespace HealthService
             CreateMap<Appointment, AppointmentDTO>();
             CreateMap<PatientForCreationDTO, Patient>();
             CreateMap<PatientForUpdateDTO, Patient>();
+            CreateMap<AppointmentForCreationDTO, Appointment>();
         }
     }
 }

@@ -8,5 +8,8 @@ namespace Contracts
     public interface IAppointmentRepository
     {
         IEnumerable<Appointment> AppointmentsByPatient(int patientId);
+        Appointment GetAppointmentById(Guid appointmentId);
+        void AddAppointment(Appointment appointment);
+        void UpdateAppointment(Appointment appointment);
     }
 }

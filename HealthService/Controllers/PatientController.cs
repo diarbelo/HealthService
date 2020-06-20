@@ -83,7 +83,7 @@ namespace HealthService.Controllers
                     return Ok(patientResult);
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
