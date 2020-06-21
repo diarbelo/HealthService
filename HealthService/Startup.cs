@@ -31,6 +31,7 @@ namespace HealthService
             services.ConfigureCors();
             services.ConfigureSqlContext(Configuration);
             services.ConfigureRepositoryWrapper();
+            services.ConfigureBusinessLogic();
 
             services.AddControllers();
             services.AddAutoMapper(typeof(Startup));

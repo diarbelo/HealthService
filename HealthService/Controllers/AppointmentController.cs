@@ -17,11 +17,13 @@ namespace HealthService.Controllers
     {
         private IRepositoryWrapper _repository;
         private IMapper _mapper;
+        private IBusinessLogic _businessLogic;
 
-        public AppointmentController(IRepositoryWrapper repository, IMapper mapper)
+        public AppointmentController(IRepositoryWrapper repository, IMapper mapper, IBusinessLogic businessLogic)
         {
             _repository = repository;
             _mapper = mapper;
+            _businessLogic = businessLogic;
         }
 
         [HttpPost]
@@ -37,6 +39,11 @@ namespace HealthService.Controllers
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Invalid model object");
+                }
+
+                if (!_businessLogic.CanAdd(appointment.PatientId, appointment.Date))
+                {
+                    return BadRequest("You cannot create another appointment for the same patient on the same day.");
                 }
 
                 var appointmentEntity = _mapper.Map<Appointment>(appointment);
@@ -65,6 +72,11 @@ namespace HealthService.Controllers
                 if (appointmentEntity == null)
                 {
                     return NotFound();
+                }
+
+                if (!_businessLogic.CanCancel(appointmentEntity.Date))
+                {
+                    return BadRequest($"Appointments must be canceled at least 24 hours in advance; appointment date: {appointmentEntity.Date}");
                 }
 
                 appointmentEntity.Active = false;
