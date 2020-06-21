@@ -104,6 +104,12 @@ namespace HealthService.Controllers
                     return BadRequest("Invalid model object");
                 }
 
+                var validatePatient = await _repository.Patient.GetPatientByIdAsync(patient.Id);
+                if (validatePatient != null)
+                {
+                    return BadRequest($"The record {patient.Id} already exists");
+                }
+
                 var patientEntity = _mapper.Map<Patient>(patient);
 
                 _repository.Patient.CreatePatient(patientEntity);
