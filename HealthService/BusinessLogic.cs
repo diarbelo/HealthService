@@ -21,7 +21,7 @@ namespace HealthService
 
             foreach (var item in patientIdentity.Appointments)
             {             
-                if (item.Date.Date == appointmentDate.Date)
+                if (item.Date.Date == appointmentDate.Date && item.Active)
                 {
                     return false; 
                 }

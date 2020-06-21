@@ -65,7 +65,7 @@ namespace HealthService.Controllers
             }
         }
 
-        [HttpPut("{id}")]
+        [HttpDelete("{id}")]
         public async Task<IActionResult> CancelAppointment(Guid id)
         {
             try
