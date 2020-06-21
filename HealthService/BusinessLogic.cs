@@ -15,9 +15,9 @@ namespace HealthService
         {
             _repository = repository;
         }
-        public bool CanAdd(int patientId, DateTime appointmentDate)
+        public async Task<bool> CanAddAsync(int patientId, DateTime appointmentDate)
         {
-            var patientIdentity = _repository.Patient.GetPatientWithDetails(patientId);
+            var patientIdentity = await _repository.Patient.GetPatientWithDetailsAsync(patientId);
 
             if (!patientIdentity.Appointments.Select(x => x.Date.Date == appointmentDate.Date).Any())
             {

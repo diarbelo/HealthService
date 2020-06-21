@@ -1,10 +1,12 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -21,9 +23,9 @@ namespace Repository
             return FindByCondition(ap => ap.PatientId.Equals(patientId)).ToList();
         }
 
-        public Appointment GetAppointmentById(Guid appointmentId)
+        public async Task<Appointment> GetAppointmentByIdAsync(Guid appointmentId)
         {
-            return FindByCondition(ap => ap.Id.Equals(appointmentId)).FirstOrDefault();
+            return await FindByCondition(ap => ap.Id.Equals(appointmentId)).FirstOrDefaultAsync();
         }
 
         public void AddAppointment(Appointment appointment)

@@ -6,6 +6,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Repository
 {
@@ -16,23 +17,23 @@ namespace Repository
         {
         }
 
-        public IEnumerable<Patient> GetAllPatients()
+        public async Task<IEnumerable<Patient>> GetAllPatientsAsync()
         {
-            return FindAll()
+            return await FindAll()
                 .OrderBy(pt => pt.LastName)
-                .ToList();
+                .ToListAsync();
         }
 
-        public Patient GetPatientById(int patientId)
+        public async Task<Patient> GetPatientByIdAsync(int patientId)
         {
-            return FindByCondition(pt => pt.Id.Equals(patientId)).FirstOrDefault();
+            return await FindByCondition(pt => pt.Id.Equals(patientId)).FirstOrDefaultAsync();
         }
 
-        public Patient GetPatientWithDetails(int patientId)
+        public async Task<Patient> GetPatientWithDetailsAsync(int patientId)
         {
-            return FindByCondition(pt => pt.Id.Equals(patientId))
+            return await FindByCondition(pt => pt.Id.Equals(patientId))
                 .Include(ap => ap.Appointments)
-                .FirstOrDefault();
+                .FirstOrDefaultAsync();
         }
 
         public void CreatePatient(Patient patient)

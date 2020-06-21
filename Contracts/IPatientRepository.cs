@@ -2,16 +2,17 @@
 using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Contracts
 {
     public interface IPatientRepository
     {
-        IEnumerable<Patient> GetAllPatients();
+        Task<IEnumerable<Patient>> GetAllPatientsAsync();
 
-        Patient GetPatientById(int patientId);
+        Task<Patient> GetPatientByIdAsync(int patientId);
 
-        Patient GetPatientWithDetails(int patientId);
+        Task<Patient> GetPatientWithDetailsAsync(int patientId);
 
         void CreatePatient(Patient patient);
         void UpdatePatient(Patient patient);

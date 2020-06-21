@@ -25,11 +25,11 @@ namespace HealthService.Controllers
         }
 
         [HttpGet]
-        public IActionResult GetAllPatients()
+        public async Task<IActionResult> GetAllPatients()
         {
             try
             {
-                var patients = _repository.Patient.GetAllPatients();
+                var patients = await _repository.Patient.GetAllPatientsAsync();
 
                 var patientsResult = _mapper.Map<IEnumerable<PatientDTO>>(patients);
 
@@ -42,11 +42,11 @@ namespace HealthService.Controllers
         }
 
         [HttpGet("{id}", Name = "PatientById")]
-        public IActionResult GetPatientById(int id)
+        public async Task<IActionResult> GetPatientById(int id)
         {
             try
             {
-                var patient = _repository.Patient.GetPatientById(id);
+                var patient = await _repository.Patient.GetPatientByIdAsync(id);
 
                 if (patient == null)
                 {
@@ -66,11 +66,11 @@ namespace HealthService.Controllers
         }
 
         [HttpGet("{id}/appointment")]
-        public IActionResult GetPatientWithDetails(int id)
+        public async Task<IActionResult> GetPatientWithDetails(int id)
         {
             try
             {
-                var patient = _repository.Patient.GetPatientWithDetails(id);
+                var patient = await _repository.Patient.GetPatientWithDetailsAsync(id);
 
                 if (patient == null)
                 {
@@ -83,14 +83,14 @@ namespace HealthService.Controllers
                     return Ok(patientResult);
                 }
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }
         }
 
         [HttpPost]
-        public IActionResult CreatePatient([FromBody]PatientForCreationDTO patient)
+        public async Task<IActionResult> CreatePatient([FromBody]PatientForCreationDTO patient)
         {
             try
             {
@@ -107,7 +107,7 @@ namespace HealthService.Controllers
                 var patientEntity = _mapper.Map<Patient>(patient);
 
                 _repository.Patient.CreatePatient(patientEntity);
-                _repository.Save();
+                await _repository.SaveAsync();
 
                 var createdPatient = _mapper.Map<PatientDTO>(patientEntity);
 
@@ -120,7 +120,7 @@ namespace HealthService.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult UpdatePatient(int id, [FromBody]PatientForUpdateDTO patient)
+        public async Task<IActionResult> UpdatePatient(int id, [FromBody]PatientForUpdateDTO patient)
         {
             try
             {
@@ -134,7 +134,7 @@ namespace HealthService.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                var patientEntity = _repository.Patient.GetPatientById(id);
+                var patientEntity = await _repository.Patient.GetPatientByIdAsync(id);
                 if (patientEntity == null)
                 {
                     return NotFound();
@@ -143,7 +143,7 @@ namespace HealthService.Controllers
                 _mapper.Map(patient, patientEntity);
 
                 _repository.Patient.UpdatePatient(patientEntity);
-                _repository.Save();
+                await _repository.SaveAsync();
 
                 return NoContent();
             }
@@ -154,11 +154,11 @@ namespace HealthService.Controllers
         }
 
         [HttpDelete("{id}")]
-        public IActionResult DeletePatient(int id)
+        public async Task<IActionResult> DeletePatient(int id)
         {
             try
             {
-                var patient = _repository.Patient.GetPatientById(id);
+                var patient = await _repository.Patient.GetPatientByIdAsync(id);
                 if (patient == null)
                 {
                     return NotFound();
@@ -170,7 +170,7 @@ namespace HealthService.Controllers
                 }
 
                 _repository.Patient.DeletePatient(patient);
-                _repository.Save();
+                await _repository.SaveAsync();
 
                 return NoContent();
             }

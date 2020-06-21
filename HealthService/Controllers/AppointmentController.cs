@@ -27,7 +27,7 @@ namespace HealthService.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddAppointment([FromBody]AppointmentForCreationDTO appointment)
+        public async Task<IActionResult> AddAppointment([FromBody]AppointmentForCreationDTO appointment)
         {
             try
             {
@@ -41,7 +41,9 @@ namespace HealthService.Controllers
                     return BadRequest("Invalid model object");
                 }
 
-                if (!_businessLogic.CanAdd(appointment.PatientId, appointment.Date))
+                var canAdd = await _businessLogic.CanAddAsync(appointment.PatientId, appointment.Date);
+
+                if (canAdd)
                 {
                     return BadRequest("You cannot create another appointment for the same patient on the same day.");
                 }
@@ -51,7 +53,7 @@ namespace HealthService.Controllers
                 appointmentEntity.Active = true;
 
                 _repository.Appointment.AddAppointment(appointmentEntity);
-                _repository.Save();
+                await _repository.SaveAsync();
 
                 var createdAppointment = _mapper.Map<AppointmentDTO>(appointmentEntity);
 
@@ -64,11 +66,11 @@ namespace HealthService.Controllers
         }
 
         [HttpPut("{id}")]
-        public IActionResult CancelAppointment(Guid id)
+        public async Task<IActionResult> CancelAppointment(Guid id)
         {
             try
             {
-                var appointmentEntity = _repository.Appointment.GetAppointmentById(id);
+                var appointmentEntity = await _repository.Appointment.GetAppointmentByIdAsync(id);
                 if (appointmentEntity == null)
                 {
                     return NotFound();
@@ -82,7 +84,7 @@ namespace HealthService.Controllers
                 appointmentEntity.Active = false;
 
                 _repository.Appointment.UpdateAppointment(appointmentEntity);
-                _repository.Save();
+                await _repository.SaveAsync();
 
                 return NoContent();
             }
