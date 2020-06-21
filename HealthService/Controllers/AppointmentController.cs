@@ -43,7 +43,7 @@ namespace HealthService.Controllers
 
                 var canAdd = await _businessLogic.CanAddAsync(appointment.PatientId, appointment.Date);
 
-                if (canAdd)
+                if (!canAdd)
                 {
                     return BadRequest("You cannot create another appointment for the same patient on the same day.");
                 }

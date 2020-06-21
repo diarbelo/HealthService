@@ -19,14 +19,16 @@ namespace HealthService
         {
             var patientIdentity = await _repository.Patient.GetPatientWithDetailsAsync(patientId);
 
-            if (!patientIdentity.Appointments.Select(x => x.Date.Date == appointmentDate.Date).Any())
-            {
-                return true;
+            foreach (var item in patientIdentity.Appointments)
+            {             
+                if (item.Date.Date == appointmentDate.Date)
+                {
+                    return false; 
+                }
             }
-            else
-            {
-                return false;
-            }
+
+            return true;
+
         }
 
         public bool CanCancel(DateTime appointmentDate)

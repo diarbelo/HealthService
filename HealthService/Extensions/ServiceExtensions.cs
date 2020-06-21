@@ -37,7 +37,7 @@ namespace HealthService.Extensions
 
         public static void ConfigureBusinessLogic(this IServiceCollection services)
         {
-            services.AddSingleton<IBusinessLogic, BusinessLogic>();
+            services.AddScoped<IBusinessLogic, BusinessLogic>();
         }
     }
 }
