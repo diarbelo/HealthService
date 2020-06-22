@@ -74,8 +74,8 @@ namespace Entities.Migrations
                 columns: new[] { "UserId", "UserName", "UserPassword", "UserRol" },
                 values: new object[,]
                 {
-                    { new Guid("05cc81a1-69f8-4beb-978e-dcf9ab0755b4"), "admin", "admin", "Manager" },
-                    { new Guid("7603d41a-1289-4813-86cc-fbf4204da8c3"), "agent", "agent", "Agent" }
+                    { new Guid("444551ba-e287-443a-919b-709d7a972b79"), "admin", "admin", "Manager" },
+                    { new Guid("09fc2f96-edf0-4b39-8bd4-b4ccfbfebd21"), "agent", "agent", "Agent" }
                 });
 
             migrationBuilder.CreateIndex(

@@ -3,8 +3,10 @@ using Entities;
 using JWTService;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.Migrations.Internal;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
 using Repository;
 using System;
@@ -36,7 +38,7 @@ namespace HealthService.Extensions
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration config)
         {
             var connectionString = config.GetConnectionString("healthservice");
-            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString));
+            services.AddDbContext<RepositoryContext>(o => o.UseSqlServer(connectionString, opt => opt.MigrationsAssembly("Entities")));
         }
 
         public static void ConfigureRepositoryWrapper(this IServiceCollection services)

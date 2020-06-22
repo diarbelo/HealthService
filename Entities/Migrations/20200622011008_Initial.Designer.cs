@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20200622002936_Initial")]
+    [Migration("20200622011008_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -139,14 +139,14 @@ namespace Entities.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("05cc81a1-69f8-4beb-978e-dcf9ab0755b4"),
+                            Id = new Guid("444551ba-e287-443a-919b-709d7a972b79"),
                             UserName = "admin",
                             UserPassword = "admin",
                             UserRol = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("7603d41a-1289-4813-86cc-fbf4204da8c3"),
+                            Id = new Guid("09fc2f96-edf0-4b39-8bd4-b4ccfbfebd21"),
                             UserName = "agent",
                             UserPassword = "agent",
                             UserRol = "Agent"
