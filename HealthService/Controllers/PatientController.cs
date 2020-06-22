@@ -121,7 +121,7 @@ namespace HealthService.Controllers
 
                 return CreatedAtRoute("PatientById", new { id = createdPatient.Id }, createdPatient);
             }
-            catch (Exception)
+            catch (Exception ex)
             {
                 return StatusCode(StatusCodes.Status500InternalServerError, "Internal server error");
             }

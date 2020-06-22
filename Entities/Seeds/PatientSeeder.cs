@@ -42,6 +42,8 @@ namespace Entities.Seeds
                     PhoneNumber = "310"
                 }
             );
+
+            builder.Property(p => p.Id).ValueGeneratedOnAdd();
         }
     }
 }

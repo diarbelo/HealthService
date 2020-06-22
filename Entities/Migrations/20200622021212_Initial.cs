@@ -11,8 +11,7 @@ namespace Entities.Migrations
                 name: "patient",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    PatientId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
                     LastName = table.Column<string>(maxLength: 60, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
@@ -74,8 +73,8 @@ namespace Entities.Migrations
                 columns: new[] { "UserId", "UserName", "UserPassword", "UserRol" },
                 values: new object[,]
                 {
-                    { new Guid("444551ba-e287-443a-919b-709d7a972b79"), "admin", "admin", "Manager" },
-                    { new Guid("09fc2f96-edf0-4b39-8bd4-b4ccfbfebd21"), "agent", "agent", "Agent" }
+                    { new Guid("5e21a7a7-93c3-46b7-a307-6e26f158fcc8"), "admin", "admin", "Manager" },
+                    { new Guid("53ca66ff-bbe3-4313-8b5d-e78c0b502373"), "agent", "agent", "Agent" }
                 });
 
             migrationBuilder.CreateIndex(
