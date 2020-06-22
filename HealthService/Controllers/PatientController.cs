@@ -6,6 +6,7 @@ using AutoMapper;
 using Contracts;
 using Entities.DataTransferObjects;
 using Entities.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -24,6 +25,7 @@ namespace HealthService.Controllers
             _mapper = mapper;
         }
 
+        //[HttpGet, Authorize]
         [HttpGet]
         public async Task<IActionResult> GetAllPatients()
         {

@@ -20,6 +20,7 @@ namespace Entities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfiguration(new PatientSeeder());
+            modelBuilder.ApplyConfiguration(new UserSeeder());
         }
     }
 }

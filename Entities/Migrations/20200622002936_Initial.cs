@@ -11,7 +11,8 @@ namespace Entities.Migrations
                 name: "patient",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
                     LastName = table.Column<string>(maxLength: 60, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
@@ -21,6 +22,20 @@ namespace Entities.Migrations
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_patient", x => x.PatientId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "user",
+                columns: table => new
+                {
+                    UserId = table.Column<Guid>(nullable: false),
+                    UserName = table.Column<string>(nullable: false),
+                    UserPassword = table.Column<string>(nullable: false),
+                    UserRol = table.Column<string>(nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_user", x => x.UserId);
                 });
 
             migrationBuilder.CreateTable(
@@ -47,17 +62,21 @@ namespace Entities.Migrations
             migrationBuilder.InsertData(
                 table: "patient",
                 columns: new[] { "PatientId", "Address", "DateOfBirth", "LastName", "Name", "PhoneNumber" },
-                values: new object[] { 11, "La mota", new DateTime(1954, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Betancur", "Armando", "310" });
+                values: new object[,]
+                {
+                    { 11, "La mota", new DateTime(1954, 3, 2, 0, 0, 0, 0, DateTimeKind.Unspecified), "Betancur", "Armando", "310" },
+                    { 24, "La mota", new DateTime(1955, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Loaiza", "Ana", "311" },
+                    { 71, "La mota", new DateTime(1985, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Betancur", "Diego", "310" }
+                });
 
             migrationBuilder.InsertData(
-                table: "patient",
-                columns: new[] { "PatientId", "Address", "DateOfBirth", "LastName", "Name", "PhoneNumber" },
-                values: new object[] { 24, "La mota", new DateTime(1955, 1, 6, 0, 0, 0, 0, DateTimeKind.Unspecified), "Loaiza", "Ana", "311" });
-
-            migrationBuilder.InsertData(
-                table: "patient",
-                columns: new[] { "PatientId", "Address", "DateOfBirth", "LastName", "Name", "PhoneNumber" },
-                values: new object[] { 71, "La mota", new DateTime(1985, 11, 9, 0, 0, 0, 0, DateTimeKind.Unspecified), "Betancur", "Diego", "310" });
+                table: "user",
+                columns: new[] { "UserId", "UserName", "UserPassword", "UserRol" },
+                values: new object[,]
+                {
+                    { new Guid("05cc81a1-69f8-4beb-978e-dcf9ab0755b4"), "admin", "admin", "Manager" },
+                    { new Guid("7603d41a-1289-4813-86cc-fbf4204da8c3"), "agent", "agent", "Agent" }
+                });
 
             migrationBuilder.CreateIndex(
                 name: "IX_appointment_PatientId",
@@ -69,6 +88,9 @@ namespace Entities.Migrations
         {
             migrationBuilder.DropTable(
                 name: "appointment");
+
+            migrationBuilder.DropTable(
+                name: "user");
 
             migrationBuilder.DropTable(
                 name: "patient");

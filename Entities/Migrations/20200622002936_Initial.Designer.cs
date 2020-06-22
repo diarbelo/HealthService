@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Entities.Migrations
 {
     [DbContext(typeof(RepositoryContext))]
-    [Migration("20200620140144_Initial")]
+    [Migration("20200622002936_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -110,6 +110,46 @@ namespace Entities.Migrations
                             LastName = "Betancur",
                             Name = "Diego",
                             PhoneNumber = "310"
+                        });
+                });
+
+            modelBuilder.Entity("Entities.Models.User", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnName("UserId")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("UserName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserPassword")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("UserRol")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("user");
+
+                    b.HasData(
+                        new
+                        {
+                            Id = new Guid("05cc81a1-69f8-4beb-978e-dcf9ab0755b4"),
+                            UserName = "admin",
+                            UserPassword = "admin",
+                            UserRol = "Manager"
+                        },
+                        new
+                        {
+                            Id = new Guid("7603d41a-1289-4813-86cc-fbf4204da8c3"),
+                            UserName = "agent",
+                            UserPassword = "agent",
+                            UserRol = "Agent"
                         });
                 });
 

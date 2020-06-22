@@ -12,6 +12,7 @@ namespace Repository
         private RepositoryContext _repoContext;
         private IPatientRepository _patient;
         private IAppointmentRepository _appointment;
+        private IUserRepository _user;
 
         public IPatientRepository Patient
         {
@@ -36,6 +37,19 @@ namespace Repository
                 }
 
                 return _appointment;
+            }
+        }
+
+        public IUserRepository User
+        {
+            get 
+            {
+                if (_user == null)
+                {
+                    _user = new UserRepository(_repoContext);
+                }
+
+                return _user;
             }
         }
 
