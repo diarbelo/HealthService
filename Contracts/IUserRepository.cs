@@ -8,6 +8,6 @@ namespace Contracts
 {
     public interface IUserRepository
     {
-        Task<User> GetUserByNameAndPasswordAsync(string userName, string userPassword);
+        Task<User> GetUserByNameAndPasswordAsync(string userMail, string userPassword);
     }
 }

@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using JWTService;
+using JWTService.Tools;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Migrations.Internal;
@@ -32,7 +33,7 @@ namespace HealthService.Extensions
 
         public static void JwtConfigurator(this IServiceCollection services)
         {
-            services.AddSingleton<IJWTConfigurator, JWTConfigurator>();
+            services.AddSingleton<IJWTConfigurator, JWTConfigurator>();            
         }
 
         public static void ConfigureSqlContext(this IServiceCollection services, IConfiguration config)

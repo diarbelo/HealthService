@@ -1,6 +1,7 @@
 ﻿using Contracts;
 using Entities;
 using Entities.Models;
+using JWTService.Tools;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,10 @@ namespace Repository
         {
         }
 
-        public async Task<User> GetUserByNameAndPasswordAsync(string userName, string userPassword)
+        public async Task<User> GetUserByNameAndPasswordAsync(string userMail, string userPassword)
         {
-            return await FindByCondition(user => user.UserName.Equals(userName) && user.UserPassword.Equals(userPassword))
+            //var passwordHash = Encrypt.GetSHA256(userPassword);
+            return await FindByCondition(user => user.UserMail.Equals(userMail) && user.UserPassword.Equals(Encrypt.GetSHA256(userPassword)))
                 .FirstOrDefaultAsync();
         }
     }
