@@ -17,6 +17,10 @@ namespace Entities.Models
         [Required(ErrorMessage = "Username is required")]
         public string UserName { get; set; }
 
+        [Required(ErrorMessage = "Username is required")]
+        [StringLength(80, ErrorMessage = "Mail can't be longer than 80 characters")]
+        public string UserMail { get; set; }
+
         [Required(ErrorMessage = "Password is required")]
         public string UserPassword { get; set; }
 

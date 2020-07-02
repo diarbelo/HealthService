@@ -11,7 +11,8 @@ namespace Entities.Migrations
                 name: "patient",
                 columns: table => new
                 {
-                    PatientId = table.Column<int>(nullable: false),
+                    PatientId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(maxLength: 60, nullable: false),
                     LastName = table.Column<string>(maxLength: 60, nullable: false),
                     DateOfBirth = table.Column<DateTime>(nullable: false),
@@ -29,12 +30,14 @@ namespace Entities.Migrations
                 {
                     UserId = table.Column<Guid>(nullable: false),
                     UserName = table.Column<string>(nullable: false),
+                    UserMail = table.Column<string>(maxLength: 80, nullable: false),
                     UserPassword = table.Column<string>(nullable: false),
                     UserRol = table.Column<string>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_user", x => x.UserId);
+                    table.UniqueConstraint("AK_Mail", x => x.UserMail);
                 });
 
             migrationBuilder.CreateTable(
@@ -70,11 +73,11 @@ namespace Entities.Migrations
 
             migrationBuilder.InsertData(
                 table: "user",
-                columns: new[] { "UserId", "UserName", "UserPassword", "UserRol" },
+                columns: new[] { "UserId", "UserMail", "UserName", "UserPassword", "UserRol" },
                 values: new object[,]
                 {
-                    { new Guid("5e21a7a7-93c3-46b7-a307-6e26f158fcc8"), "admin", "admin", "Manager" },
-                    { new Guid("53ca66ff-bbe3-4313-8b5d-e78c0b502373"), "agent", "agent", "Agent" }
+                    { new Guid("c1031618-0e87-4ede-8020-7c70c2b4054c"), "admin@mail.com", "Diego", "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918", "Manager" },
+                    { new Guid("a8021c00-d37a-4465-abc2-497988b97784"), "agent@mail.com", "Armando", "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824", "Agent" }
                 });
 
             migrationBuilder.CreateIndex(

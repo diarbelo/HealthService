@@ -118,6 +118,11 @@ namespace Entities.Migrations
                         .HasColumnName("UserId")
                         .HasColumnType("uniqueidentifier");
 
+                    b.Property<string>("UserMail")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(80)")
+                        .HasMaxLength(80);
+
                     b.Property<string>("UserName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -137,16 +142,18 @@ namespace Entities.Migrations
                     b.HasData(
                         new
                         {
-                            Id = new Guid("5e21a7a7-93c3-46b7-a307-6e26f158fcc8"),
-                            UserName = "admin",
-                            UserPassword = "admin",
+                            Id = new Guid("c1031618-0e87-4ede-8020-7c70c2b4054c"),
+                            UserMail = "admin@mail.com",
+                            UserName = "Diego",
+                            UserPassword = "8c6976e5b5410415bde908bd4dee15dfb167a9c873fc4bb8a81f6f2ab448a918",
                             UserRol = "Manager"
                         },
                         new
                         {
-                            Id = new Guid("53ca66ff-bbe3-4313-8b5d-e78c0b502373"),
-                            UserName = "agent",
-                            UserPassword = "agent",
+                            Id = new Guid("a8021c00-d37a-4465-abc2-497988b97784"),
+                            UserMail = "agent@mail.com",
+                            UserName = "Armando",
+                            UserPassword = "d4f0bc5a29de06b510f9aa428f1eedba926012b591fef7a518e776a7c9bd1824",
                             UserRol = "Agent"
                         });
                 });
